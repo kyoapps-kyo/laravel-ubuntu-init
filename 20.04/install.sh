@@ -38,9 +38,10 @@ function init_repositories {
 
     # https://mirrors.tuna.tsinghua.edu.cn/  2021-02-05移除 nodesource 镜像
 
-    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-    echo 'deb https://deb.nodesource.com/node_10.x focal main' > /etc/apt/sources.list.d/nodesource.list
-    echo 'deb-src https://deb.nodesource.com/node_10.x focal main' >> /etc/apt/sources.list.d/nodesource.list
+    # curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+    # echo 'deb https://deb.nodesource.com/node_10.x focal main' > /etc/apt/sources.list.d/nodesource.list
+    # echo 'deb-src https://deb.nodesource.com/node_10.x focal main' >> /etc/apt/sources.list.d/nodesource.list
+    curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
 
     apt-get update
 }
@@ -51,11 +52,12 @@ function install_basic_softwares {
 
 function install_node_yarn {
     apt-get install -y nodejs yarn
-    sudo -H -u ${WWW_USER} sh -c 'cd ~ && yarn config set registry https://registry.npm.taobao.org'
+    # 国外用注释下面
+    # sudo -H -u ${WWW_USER} sh -c 'cd ~ && yarn config set registry https://registry.npm.taobao.org'
 }
 
 function install_php {
-    apt-get install -y php7.4-bcmath php7.4-cli php7.4-curl php7.4-fpm php7.4-gd php7.4-mbstring php7.4-mysql php7.4-opcache php7.4-pgsql php7.4-readline php7.4-xml php7.4-zip php7.4-sqlite3 php7.4-redis
+    apt-get install -y php8.1-bcmath php8.1-cli php8.1-curl php8.1-fpm php8.1-gd php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-pgsql php8.1-readline php8.1-xml php8.1-zip php8.1-sqlite3 php8.1-redis
 }
 
 function install_others {
@@ -70,7 +72,8 @@ function install_others {
 function install_composer {
     curl https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
     chmod +x /usr/local/bin/composer
-    sudo -H -u ${WWW_USER} sh -c  'cd ~ && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/'
+    # 国外用注释下面
+    # sudo -H -u ${WWW_USER} sh -c  'cd ~ && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/'
 }
 
 call_function init_system "正在初始化系统" ${LOG_PATH}
