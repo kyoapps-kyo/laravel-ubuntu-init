@@ -7,10 +7,11 @@ source ${CURRENT_DIR}/../common/common.sh
 
 read -r -p "请输入项目名：" project
 
-[[ $project =~ ^[a-zA-Z\0-9_\-\.]+$ ]] || {
-    ansi -n --bold --bg-red "项目名包含非法字符"
-    exit 1
-}
+# 无需验证字符
+# [[ $project =~ ^[a-zA-Z\0-9_\-\.]+$ ]] || {
+#     ansi -n --bold --bg-red "项目名包含非法字符"
+#     exit 1
+# }
 
 read -r -p "请输入站点域名（多个域名用空格隔开）：" domains
 
